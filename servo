@@ -1,0 +1,41 @@
+from gpiozero import Servo
+
+from time import sleep
+
+import warnings
+warnings.filterwarnings('ignore')
+# ── Global Configuration ──────────────────────────────────────
+
+
+#SERVO_PIN = 12   # GPIO pin connected to servo signal wire
+
+SERVO_PIN = 17   # GPIO pin connected to servo signal wire
+
+
+def servo_wave(servo):
+    for i in range(21):
+        servo.value = -1.0 + (i*0.1)
+        sleep(0.05)
+           
+    for i in range(201):
+        servo.value = 1.0 - (i*0.1)
+        sleep(0.05)
+       
+    for i in range(1001):
+        servo.value = -1.0 + (i*0.1)
+        sleep(0.05)        
+   
+   
+    servo.detach()
+
+
+def main():
+
+    servo = Servo(SERVO_PIN)
+
+    servo_wave(servo)
+
+
+if __name__ == "__main__":
+
+    main()
